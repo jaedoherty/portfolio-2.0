@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Tabs from "./Tabs";
+import HomePage from "./HomePage";
+import "./App.css";
 
 function App() {
+  const [currentTab, setCurrentTab] = useState("HOME");
+
+  const displayTabContent = () => {
+    switch (currentTab) {
+      case "HOME":
+        return <HomePage />;
+
+      default:
+        return <div>{currentTab}</div>;
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div id="app-body">
+        <Tabs setCurrentTab={setCurrentTab} />
+        <div id="tab-content">
+          <div id="portfolio-header">Jae Doherty, Software Engineer </div>
+          {displayTabContent()}
+        </div>
+      </div>
     </div>
   );
 }
